@@ -1,8 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**CHANGELOG.md Table Of Contents**
+
+- [Change Log](#change-log)
+  - [[0.3.0] - 2016-11-29](#030---2016-11-29)
+    - [Added](#added)
+  - [[0.2.0] - 2016-03-22](#020---2016-03-22)
+    - [Added](#added-1)
+    - [Changed](#changed)
+  - [0.1.0 - 2016-02-16](#010---2016-02-16)
+    - [Added](#added-2)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Change Log
 
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
-
 
 ## [0.3.0] - 2016-11-29
 
@@ -10,7 +24,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Restricting invocation to specific locations with
   `batslib_is_caller()`
-
 
 ## [0.2.0] - 2016-03-22
 
@@ -22,7 +35,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Library renamed to `bats-support`
-
 
 ## 0.1.0 - 2016-02-16
 
@@ -41,6 +53,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Determining key width for two-column and mixed formatting with
   `batslib_get_max_single_line_key_width()`
 
-
-[0.3.0]: https://github.com/ztombol/bats-support/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/ztombol/bats-support/compare/v0.1.0...v0.2.0
+[0.3.0]: https://github.com/ztombol/bats-support/compare/v0.2.0...v0.3.0

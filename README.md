@@ -1,14 +1,29 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**README.md Table Of Contents**
+
+- [bats-support](#bats-support)
+  - [Error reporting](#error-reporting)
+    - [`fail`](#fail)
+  - [Output formatting](#output-formatting)
+    - [Simple message](#simple-message)
+    - [Key-Value pairs](#key-value-pairs)
+  - [Language and Execution](#language-and-execution)
+    - [Restricting invocation to specific locations](#restricting-invocation-to-specific-locations)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # bats-support
 
 [![GitHub license](https://img.shields.io/badge/license-CC0-blue.svg)](https://raw.githubusercontent.com/bats-core/bats-support/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/bats-core/bats-support.svg)](https://github.com/bats-core/bats-support/releases/latest)
 [![Build Status](https://github.com/bats-core/bats-support/workflows/Tests/badge.svg)](https://github.com/bats-core/bats-support/actions?query=workflow%3ATests)
 
-
 `bats-support` is a supporting library providing common functions to
-test helper libraries written for [Bats][bats].
+test helper libraries written for [Bats].
 
 Features:
+
 - [error reporting](#error-reporting)
 - [output formatting](#output-formatting)
 - [language tools](#language-and-execution)
@@ -19,7 +34,6 @@ load this library.
 If you want to use this library in your own helpers or just want to
 learn about its internals see the developer documentation in the [source
 files](src).
-
 
 ## Error reporting
 
@@ -50,13 +64,11 @@ This function always fails and simply outputs the given message.
 this test always fails
 ```
 
-
 ## Output formatting
 
 Many test helpers need to produce human readable output. This library
 provides a simple way to format simple messages and key value pairs, and
 display them on the standard error.
-
 
 ### Simple message
 
@@ -68,7 +80,6 @@ simply wrapped in a header and a footer to help them stand out.
 `--partial' and `--regexp' are mutually exclusive
 --
 ```
-
 
 ### Key-Value pairs
 
@@ -173,9 +184,8 @@ log_test() {
 }
 ```
 
-
 <!-- REFERENCES -->
 
 [bats]: https://github.com/bats-core/bats-core
-[bats-docs]: https://github.com/bats-core/bats-docs
 [bats-assert]: https://github.com/bats-core/bats-assert
+[bats-docs]: https://github.com/bats-core/bats-docs
