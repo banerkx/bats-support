@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 #
 # bats-support - Supporting library for Bats test helpers
 #
@@ -10,7 +12,7 @@
 #
 # You should have received a copy of the CC0 Public Domain Dedication
 # along with this software. If not, see
-# <http://creativecommons.org/publicdomain/zero/1.0/>. 
+# <http://creativecommons.org/publicdomain/zero/1.0/>.
 #
 
 #
@@ -38,7 +40,9 @@ batslib_err() {
   { if (( $# > 0 )); then
       echo "$@"
     else
-      PATH="$BATS_SAVED_PATH" command cat -
+# NOTE: BATS_SAVED_PATH is assigned elsewhere.
+# shellcheck disable=SC2154
+      PATH="${BATS_SAVED_PATH}" command cat -
     fi
   } >&2
 }
@@ -62,10 +66,10 @@ batslib_err() {
 batslib_count_lines() {
   local -i n_lines=0
   local line
-  while IFS='' read -r line || [[ -n $line ]]; do
+  while IFS='' read -r line || [[ -n ${line} ]]; do
     (( ++n_lines ))
   done < <(printf '%s' "$1")
-  echo "$n_lines"
+  echo "${n_lines}"
 }
 
 # Determine whether all strings are single-line.
@@ -79,7 +83,7 @@ batslib_count_lines() {
 #   1 - otherwise
 batslib_is_single_line() {
   for string in "$@"; do
-    (( $(batslib_count_lines "$string") > 1 )) && return 1
+    (( $(batslib_count_lines "${string}") > 1 )) && return 1
   done
   return 0
 }
@@ -103,10 +107,10 @@ batslib_get_max_single_line_key_width() {
   local -i max_len=-1
   while (( $# != 0 )); do
     local -i key_len="${#1}"
-    batslib_is_single_line "$2" && (( key_len > max_len )) && max_len="$key_len"
+    batslib_is_single_line "${2}" && (( key_len > max_len )) && max_len="${key_len}"
     shift 2
   done
-  echo "$max_len"
+  echo "${max_len}"
 }
 
 # Print key-value pairs in two-column format.
@@ -129,7 +133,7 @@ batslib_get_max_single_line_key_width() {
 batslib_print_kv_single() {
   local -ir col_width="$1"; shift
   while (( $# != 0 )); do
-    printf '%-*s : %s\n' "$col_width" "$1" "$2"
+    printf '%-*s : %s\n' "${col_width}" "${1}" "${2}"
     shift 2
   done
 }
@@ -186,15 +190,17 @@ batslib_print_kv_single_or_multi() {
   local -a values=()
   local -i i
   for (( i=1; i < ${#pairs[@]}; i+=2 )); do
-    values+=( "${pairs[$i]}" )
+    values+=( "${pairs[${i}]}" )
   done
 
   if batslib_is_single_line "${values[@]}"; then
-    batslib_print_kv_single "$width" "${pairs[@]}"
+    batslib_print_kv_single "${width}" "${pairs[@]}"
   else
     local -i i
     for (( i=1; i < ${#pairs[@]}; i+=2 )); do
-      pairs[$i]="$( batslib_prefix < <(printf '%s' "${pairs[$i]}") )"
+# NOTE: Will not fix SC2119 here.
+# shellcheck disable=SC2119
+      pairs[${i}]="$( batslib_prefix < <(printf '%s' "${pairs[${i}]}") )"
     done
     batslib_print_kv_multi "${pairs[@]}"
   fi
@@ -212,11 +218,13 @@ batslib_print_kv_single_or_multi() {
 #   STDIN - lines
 # Outputs:
 #   STDOUT - prefixed lines
+# NOTE: Will not fix SC2120 here.
+# shellcheck disable=SC2120
 batslib_prefix() {
   local -r prefix="${1:-  }"
   local line
-  while IFS='' read -r line || [[ -n $line ]]; do
-    printf '%s%s\n' "$prefix" "$line"
+  while IFS='' read -r line || [[ -n ${line} ]]; do
+    printf '%s%s\n' "${prefix}" "${line}"
   done
 }
 
@@ -240,16 +248,18 @@ batslib_prefix() {
 batslib_mark() {
   local -r symbol="$1"; shift
   # Sort line numbers.
-  set -- $( sort -nu <<< "$( printf '%d\n' "$@" )" )
+# NOTE: Will not fix SC2046 here.
+# shellcheck disable=SC2046
+  set -- $( sort -nu <<< "$( printf '%d\n' "${@}" )" )
 
   local line
   local -i idx=0
-  while IFS='' read -r line || [[ -n $line ]]; do
+  while IFS='' read -r line || [[ -n ${line} ]]; do
     if (( ${1:--1} == idx )); then
       printf '%s\n' "${symbol}${line:${#symbol}}"
       shift
     else
-      printf '%s\n' "$line"
+      printf '%s\n' "${line}"
     fi
     (( ++idx ))
   done
@@ -273,7 +283,7 @@ batslib_mark() {
 batslib_decorate() {
   echo
   echo "-- $1 --"
-  PATH="$BATS_SAVED_PATH" command cat -
+  PATH="${BATS_SAVED_PATH}" command cat -
   echo '--'
   echo
 }
