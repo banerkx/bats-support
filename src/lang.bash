@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 #
 # bats-util - Various auxiliary functions for Bats
 #
@@ -61,11 +63,11 @@ batslib_is_caller() {
 
   # Check call stack.
   if (( is_mode_direct )); then
-    [[ $func == "${FUNCNAME[2]}" ]] && return 0
+    [[ ${func} == "${FUNCNAME[2]}" ]] && return 0
   else
     local -i depth
     for (( depth=2; depth<${#FUNCNAME[@]}; ++depth )); do
-      [[ $func == "${FUNCNAME[$depth]}" ]] && return 0
+      [[ ${func} == "${FUNCNAME[${depth}]}" ]] && return 0
     done
   fi
 

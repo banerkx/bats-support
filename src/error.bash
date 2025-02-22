@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 #
 # bats-support - Supporting library for Bats test helpers
 #
@@ -36,6 +38,8 @@
 # Outputs:
 #   STDERR - message
 fail() {
-  (( $# == 0 )) && batslib_err || batslib_err "$@"
+# NOTE: Will not fix SC2015 here.
+# shellcheck disable=SC2015
+  (( ${#} == 0 )) && batslib_err || batslib_err "${@}"
   return 1
 }
