@@ -7,7 +7,7 @@ load test_helper
                     'k 2 '  'v 2'
                     'k __3' 'v 3' )
   run batslib_print_kv_single_or_multi 5 "${pairs[@]}"
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
   [ "${#lines[@]}" == '3' ]
   [ "${lines[0]}" == 'k _1  : v 1' ]
   [ "${lines[1]}" == 'k 2   : v 2' ]
@@ -19,7 +19,7 @@ load test_helper
                     'k 2'   $'v 2-1\nv 2-2'
                     'k __3' 'v 3' )
   run batslib_print_kv_single_or_multi 5 "${pairs[@]}"
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
   [ "${#lines[@]}" == '7' ]
   [ "${lines[0]}" == 'k _1 (1 lines):' ]
   [ "${lines[1]}" == '  v 1' ]

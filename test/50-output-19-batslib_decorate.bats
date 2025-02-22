@@ -5,7 +5,7 @@ load test_helper
 @test 'batslib_decorate() <title>: encloses the input in a footer line and a header line containing <title>' {
   run bash -c "source '${TEST_MAIN_DIR}/load.bash'
                echo 'body' | batslib_decorate 'title'"
-  [ "$status" -eq 0 ]
+  [ "${status}" -eq 0 ]
   [ "${#lines[@]}" -eq 3 ]
   [ "${lines[0]}" == '-- title --' ]
   [ "${lines[1]}" == 'body' ]
@@ -13,15 +13,15 @@ load test_helper
 }
 
 @test 'batslib_decorate() works with modified path' {
-  export PATH="$BATS_TEST_DIRNAME:$PATH"
+  export PATH="${BATS_TEST_DIRNAME}:${PATH}"
   echo body | {
     # Verify stub
     run which cat
-    [ "$status" -eq 0 ]
-    [ "$output" = "$BATS_TEST_DIRNAME/cat" ]
+    [ "${status}" -eq 0 ]
+    [ "${output}" = "${BATS_TEST_DIRNAME}/cat" ]
     # Should still work
     run batslib_decorate 'title'
-    [ "$status" -eq 0 ]
+    [ "${status}" -eq 0 ]
     [ "${#lines[@]}" -eq 3 ]
     [ "${lines[0]}" == '-- title --' ]
     [ "${lines[1]}" == 'body' ]
@@ -37,7 +37,7 @@ load test_helper
     [ "$(cat)" = "Mocked cat" ]
     # Should still work
     run batslib_decorate 'title'
-    [ "$status" -eq 0 ]
+    [ "${status}" -eq 0 ]
     [ "${#lines[@]}" -eq 3 ]
     [ "${lines[0]}" == '-- title --' ]
     [ "${lines[1]}" == 'body' ]
