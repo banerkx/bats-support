@@ -3,6 +3,7 @@
 load test_helper
 
 @test 'batslib_prefix() <prefix>: prefixes each line of the input with <prefix>' {
+# shellcheck disable=SC2154
   run bash -c "source '${TEST_MAIN_DIR}/load.bash'
                printf 'a\nb\nc\n' | batslib_prefix '_'"
   [ "${status}" -eq 0 ]

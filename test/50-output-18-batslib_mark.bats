@@ -3,6 +3,7 @@
 load test_helper
 
 @test 'batslib_mark() <mark> <index>: marks the <index>-th line of the input with <mark>' {
+# shellcheck disable=SC2154
   run bash -c "source '${TEST_MAIN_DIR}/load.bash'
                printf ' a\n b\n c\n' | batslib_mark '>' 0"
   [ "${status}" -eq 0 ]

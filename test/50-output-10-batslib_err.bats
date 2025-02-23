@@ -9,6 +9,7 @@ load test_helper
 }
 
 @test 'batslib_err(): reads <message...> from STDIN' {
+# shellcheck disable=SC2154
   run bash -c "source '${TEST_MAIN_DIR}/load.bash'
                echo 'm1' 'm2' | batslib_err"
   [ "${status}" -eq 0 ]
@@ -16,6 +17,7 @@ load test_helper
 }
 
 @test 'batslib_err() works with modified path' {
+# shellcheck disable=SC2154
   export PATH="${BATS_TEST_DIRNAME}:${PATH}"
   echo 'm1 m2' | {
     # Verify stub

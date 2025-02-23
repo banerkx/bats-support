@@ -35,6 +35,7 @@ test_func_lvl_0() {
 }
 
 # Correctness
+# shellcheck disable=SC2030
 @test 'batslib_is_caller() <function>: the current function does not appear on the call stack' {
   run test_func_lvl_0 test_func_lvl_0
   [ "${status}" -eq 1 ]
@@ -49,7 +50,9 @@ test_func_lvl_0() {
 # Options
 test_i_indirect() {
   run test_func_lvl_2 "$@"
+# shellcheck disable=SC2031
   [ "${status}" -eq 0 ]
+# shellcheck disable=SC2030,SC2031
   [ "${#lines[@]}" -eq 0 ]
 }
 

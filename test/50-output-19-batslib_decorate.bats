@@ -3,6 +3,7 @@
 load test_helper
 
 @test 'batslib_decorate() <title>: encloses the input in a footer line and a header line containing <title>' {
+# shellcheck disable=SC2154
   run bash -c "source '${TEST_MAIN_DIR}/load.bash'
                echo 'body' | batslib_decorate 'title'"
   [ "${status}" -eq 0 ]
@@ -13,6 +14,7 @@ load test_helper
 }
 
 @test 'batslib_decorate() works with modified path' {
+# shellcheck disable=SC2154
   export PATH="${BATS_TEST_DIRNAME}:${PATH}"
   echo body | {
     # Verify stub

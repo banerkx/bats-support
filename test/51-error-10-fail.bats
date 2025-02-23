@@ -9,6 +9,7 @@ load test_helper
 }
 
 @test 'fail(): reads <message> from STDIN' {
+# shellcheck disable=SC2154
   run bash -c "source '${TEST_MAIN_DIR}/load.bash'
                echo 'message' | fail"
   [ "${status}" -eq 1 ]
